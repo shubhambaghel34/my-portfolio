@@ -9,6 +9,7 @@ const Experience = () => {
       position: 'Associate Staff Engineer',
       duration: '2023 - Present',
       location: 'Pune, India',
+      companyUrl: 'https://www.nagarro.com/en/',
       description: 'Leading development of scalable event-driven microservices and architecting resilient backend systems. Collaborating with business analysts and engineering leaders to drive delivery of reliable, secure, and scalable platforms.',
       technologies: ['NestJS', 'TypeScript', 'Redis', 'WebSocket.IO', 'AWS Lambda', 'S3', 'Step Functions'],
       achievements: [
@@ -18,29 +19,17 @@ const Experience = () => {
       ]
     },
     {
-      company: 'Previous Companies',
+      company: 'UST',
       position: 'Senior Software Engineer',
       duration: '2018 - 2023',
       location: 'India',
+      companyUrl: 'https://www.ust.com/en/boundless/product-engineering',
       description: 'Delivered reliable backend infrastructures, supported high-concurrency APIs, and enabled cross-region functionality for global platforms. Specialized in microservices architecture and cloud engineering.',
       technologies: ['Node.js', 'TypeScript', 'GraphQL', 'Kafka', 'Docker', 'Kubernetes', 'AWS'],
       achievements: [
         'Architected event-driven microservices for high-performance applications',
         'Implemented Redis caching strategies improving response times by 60%',
         'Designed CI/CD workflows reducing deployment time by 70%'
-      ]
-    },
-    {
-      company: 'Early Career',
-      position: 'Full Stack Developer',
-      duration: '2016 - 2018',
-      location: 'India',
-      description: 'Started as a self-taught developer, building full-stack applications and learning modern web technologies. Contributed to open-source projects and developed problem-solving skills.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express.js', 'JavaScript', 'HTML/CSS'],
-      achievements: [
-        'Developed multiple full-stack applications from concept to deployment',
-        'Contributed to open-source projects and learned best practices',
-        'Built foundation in system design and architecture principles'
       ]
     }
   ];
@@ -113,7 +102,9 @@ const Experience = () => {
                 </div>
                 
                 <motion.a
-                  href="#"
+                  href={exp.companyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-primary-color hover:text-secondary-color transition-colors duration-200 mt-4 lg:mt-0"
                   whileHover={{ scale: 1.05 }}
                 >
