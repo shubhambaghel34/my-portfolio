@@ -9,7 +9,7 @@
 
 **Experience the future of portfolio websites with an interactive 3D night island scene!** 🚀
 
-[🌐 **Live Demo**](https://nightcoderdev.vercel.app/) • [📧 **Contact Me**](shubhambaghel34@gmail.com) • [💼 **Hire Me**](https://www.linkedin.com/in/shubhamsinhabaghel)
+[🌐 **Live Demo**](https://nightcoderdev.vercel.app/) • [📧 **Contact Me**](https://www.linkedin.com/in/shubhamsinhabaghel) • [💼 **Hire Me**](https://www.linkedin.com/in/shubhamsinhabaghel)
 
 </div>
 
