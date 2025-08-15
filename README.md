@@ -9,7 +9,7 @@
 
 **Experience the future of portfolio websites with an interactive 3D night island scene!** 🚀
 
-[🌐 **Live Demo**](https://nightcoderdev.vercel.app/) • [📧 **Contact Me**](#contact) • [💼 **Hire Me**](#)
+[🌐 **Live Demo**](https://nightcoderdev.vercel.app/) • [📧 **Contact Me**](shubhambaghel34@gmail.com) • [💼 **Hire Me**](https://www.linkedin.com/in/shubhamsinhabaghel)
 
 </div>
 
@@ -227,10 +227,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 📞 **Get In Touch**
 
 - **🌐 Portfolio**: [Live Demo](https://nightcoderdev.vercel.app/)
-- **📧 Email**: [shubham@example.com](mailto:shubham@example.com)
-- **💼 LinkedIn**: [Shubham Baghel](https://linkedin.com/in/shubhambaghel)
-- **🐙 GitHub**: [@shubhambaghel](https://github.com/shubhambaghel)
-- **🐦 Twitter**: [@shubhambaghel](https://twitter.com/shubhambaghel)
+- **📧 Email**: [shubham@example.com](mailto:shubhambaghel34@example.com)
+- **💼 LinkedIn**: [Shubham Baghel](https://www.linkedin.com/in/shubhamsinhabaghel)
+- **🐙 GitHub**: [@shubhambaghel](https://github.com/shubhambaghel34)
+- **🐦 Twitter**: [@shubhambaghel](https://x.com/CoderRuntime)
 
 ---
 
