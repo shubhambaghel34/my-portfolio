@@ -70,7 +70,7 @@ const Contact = () => {
     },
     {
       name: 'Twitter',
-      url: 'https://twitter.com/yourusername',
+      url: 'https://x.com/CoderRuntime',
       icon: '🐦'
     }
   ];
