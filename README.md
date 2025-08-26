@@ -227,7 +227,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 📞 **Get In Touch**
 
 - **🌐 Portfolio**: [Live Demo](https://nightcoderdev.vercel.app/)
-- **📧 Email**: [shubham@example.com](mailto:shubhambaghel34@gmail.com)
+- **📧 Email**: [shubham@gmail.com](mailto:shubhambaghel34@gmail.com)
 - **💼 LinkedIn**: [Shubham Baghel](https://www.linkedin.com/in/shubhamsinhabaghel)
 - **🐙 GitHub**: [@shubhambaghel](https://github.com/shubhambaghel34)
 - **🐦 Twitter**: [@shubhambaghel](https://x.com/CoderRuntime)
