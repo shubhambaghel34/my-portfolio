@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Eye } from 'lucide-react';
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
   
   const projects = [
     {
@@ -80,15 +79,7 @@ const Projects = () => {
     }
   ];
 
-  const filters = [
-    { key: 'all', label: 'All Projects' },
-    { key: 'frontend', label: 'Frontend' },
-    { key: 'backend', label: 'Backend' }
-  ];
-
-  const filteredProjects = projects.filter(project => 
-    activeFilter === 'all' || project.category === activeFilter
-  );
+  const filteredProjects = projects;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -120,7 +111,7 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Featured Projects</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">Projects</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto"></div>
           <p className="text-xl text-gray-300 mt-6 max-w-3xl mx-auto">
             A collection of projects that showcase my skills in full-stack development, 
@@ -128,30 +119,7 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {filters.map((filter) => (
-            <motion.button
-              key={filter.key}
-              onClick={() => setActiveFilter(filter.key)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                activeFilter === filter.key
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-xl shadow-cyan-400/30'
-                  : 'bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-100 hover:from-cyan-400/30 hover:to-blue-500/30 border-2 border-cyan-400/40 shadow-lg shadow-cyan-400/10 hover:shadow-xl hover:shadow-cyan-400/20'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {filter.label}
-            </motion.button>
-          ))}
-        </motion.div>
+        
 
         {/* Projects Grid */}
         <motion.div

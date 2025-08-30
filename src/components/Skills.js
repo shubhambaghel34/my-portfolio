@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Cloud, Wrench, Zap, Shield, Cpu, Globe } from 'lucide-react';
+import { Code, Database, Cloud, Zap } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -10,7 +10,7 @@ const Skills = () => {
       skills: [
         { name: 'React.js', level: 95, color: 'from-blue-500 to-cyan-500' },
         { name: 'TypeScript', level: 90, color: 'from-blue-600 to-blue-800' },
-        { name: 'Next.js', level: 88, color: 'from-gray-700 to-gray-900' },
+        { name: 'JavaScript', level: 95, color: 'from-yellow-400 to-yellow-600' },
         { name: 'HTML/CSS', level: 92, color: 'from-orange-500 to-red-500' },
         { name: 'Tailwind CSS', level: 85, color: 'from-cyan-400 to-blue-500' }
       ]
@@ -50,28 +50,39 @@ const Skills = () => {
     }
   ];
 
-  const additionalSkills = [
-    { name: 'Microservices', icon: <Cpu size={16} />, category: 'Architecture' },
-    { name: 'Event-Driven', icon: <Zap size={16} />, category: 'Patterns' },
-    { name: 'Circuit Breaker', icon: <Shield size={16} />, category: 'Resilience' },
-    { name: 'WebSocket.IO', icon: <Globe size={16} />, category: 'Real-time' },
-    { name: 'Serverless', icon: <Cloud size={16} />, category: 'Cloud' },
-    { name: 'Monitoring', icon: <Wrench size={16} />, category: 'Ops' }
-  ];
+  // Build a flat, unique list of skill names for the marquee
+  const allSkillNames = Array.from(
+    new Set(skillCategories.flatMap((c) => c.skills.map((s) => s.name)))
+  );
+  const marqueeSkills = [...allSkillNames, ...allSkillNames];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+  // Map skill names to Devicon classes
+  const deviconMap = {
+    'React.js': 'devicon-react-original',
+    'TypeScript': 'devicon-typescript-plain',
+    'JavaScript': 'devicon-javascript-plain',
+    'HTML/CSS': 'devicon-html5-plain',
+    'Tailwind CSS': 'devicon-tailwindcss-plain',
+    'Node.js': 'devicon-nodejs-plain',
+    'NestJS': 'devicon-nestjs-plain',
+    'Express.js': 'devicon-express-original',
+    'GraphQL': 'devicon-graphql-plain',
+    'REST APIs': 'devicon-postman-plain',
+    'AWS': 'devicon-amazonwebservices-plain',
+    'Docker': 'devicon-docker-plain',
+    'Kubernetes': 'devicon-kubernetes-plain',
+    'CI/CD': 'devicon-github-original',
+    'Terraform': 'devicon-terraform-plain',
+    'MongoDB': 'devicon-mongodb-plain',
+    'PostgreSQL': 'devicon-postgresql-plain',
+    'Redis': 'devicon-redis-plain',
+    'Elasticsearch': 'devicon-elasticsearch-plain',
+    'Message Queues': 'devicon-rabbitmq-plain'
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
+  const getDeviconClass = (name) => {
+    const base = deviconMap[name] || 'devicon-codepen-plain';
+    return `${base} colored`;
   };
 
   return (
@@ -96,113 +107,47 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-8 mb-16"
-        >
-          {skillCategories.map((category, categoryIndex) => (
+        {/* Flowing marquee of skill chips */}
+        <div className="mb-10">
+          <div className="relative overflow-hidden">
             <motion.div
-              key={categoryIndex}
-              variants={itemVariants}
-              className="bg-gradient-to-br from-cyan-400/20 to-blue-500/20 backdrop-blur-md border-2 border-cyan-400/40 rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-cyan-400/10 hover:shadow-cyan-400/20"
+              className="flex gap-4 whitespace-nowrap will-change-transform"
+              initial={{ x: 0 }}
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             >
-                              <div className="flex items-center gap-3 mb-6">
-                  <div className="text-cyan-400 drop-shadow-lg">{category.icon}</div>
-                  <h3 className="text-xl font-semibold text-white drop-shadow-sm">{category.title}</h3>
-                </div>
-
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-white">{skill.name}</span>
-                      <span className="text-sm text-cyan-400 font-semibold">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-background-tertiary rounded-full h-2.5 overflow-hidden">
-                      <motion.div
-                        className={`bg-gradient-to-r ${skill.color} h-2.5 rounded-full relative`}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.5, delay: skillIndex * 0.1 }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
-                      </motion.div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Additional Skills Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl font-semibold text-text-primary mb-8 text-center">Specialized Expertise</h3>
-          <div className="bg-background-secondary border border-border-color rounded-xl overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-              {additionalSkills.map((skill, index) => (
-                <motion.div
-                  key={index}
-                  className="p-6 border-r border-b border-border-color last:border-r-0 hover:bg-accent-color/5 transition-colors duration-200"
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+              {marqueeSkills.map((name, index) => (
+                <div
+                  key={`lane1-${index}`}
+                  className="inline-flex items-center gap-2 bg-background-tertiary/60 border border-cyan-400/30 rounded-lg px-4 py-2"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="text-primary-color">{skill.icon}</div>
-                    <span className="text-sm text-accent-color font-medium">{skill.category}</span>
-                  </div>
-                  <h4 className="text-lg font-semibold text-text-primary">{skill.name}</h4>
-                </motion.div>
+                  <i className={`${getDeviconClass(name)} text-2xl`}></i>
+                  <span className="text-sm font-medium text-white">{name}</span>
+                </div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+          <div className="relative overflow-hidden mt-6">
+            <motion.div
+              className="flex gap-4 whitespace-nowrap will-change-transform"
+              initial={{ x: "-50%" }}
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+            >
+              {marqueeSkills.map((name, index) => (
+                <div
+                  key={`lane2-${index}`}
+                  className="inline-flex items-center gap-2 bg-background-tertiary/60 border border-cyan-400/30 rounded-lg px-4 py-2"
+                >
+                  <i className={`${getDeviconClass(name)} text-2xl`}></i>
+                  <span className="text-sm font-medium text-white">{name}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
 
-        {/* Learning Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center"
-        >
-          <h3 className="text-2xl font-semibold text-text-primary mb-6">Currently Learning</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { name: 'Rust', status: 'In Progress', color: 'from-orange-500 to-red-600' },
-              { name: 'WebAssembly', status: 'Exploring', color: 'from-purple-500 to-pink-600' },
-              { name: 'Machine Learning', status: 'Basics', color: 'from-blue-500 to-indigo-600' },
-              { name: 'Blockchain', status: 'Learning', color: 'from-green-500 to-teal-600' }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                className={`bg-gradient-to-r ${item.color} text-white px-6 py-3 rounded-lg shadow-lg`}
-                whileHover={{ scale: 1.05, y: -2 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="font-semibold">{item.name}</div>
-                <div className="text-sm opacity-90">{item.status}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        
       </div>
     </section>
   );

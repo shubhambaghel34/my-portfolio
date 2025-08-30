@@ -31,6 +31,7 @@ const Navbar = () => {
     { name: 'Experience', href: '#experience' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
+    { name: 'CV', href: '#cv' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -102,6 +103,17 @@ const Navbar = () => {
 
           {/* Social Links & Dark Mode Toggle */}
           <div className="hidden md:flex items-center space-x-4">
+            {process.env.REACT_APP_CV_URL && (
+              <motion.a
+                href={process.env.REACT_APP_CV_URL}
+                download
+                className="px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-xl shadow-cyan-400/30"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Download CV
+              </motion.a>
+            )}
             <motion.button
               onClick={toggleDarkMode}
               className="text-text-secondary hover:text-primary-color transition-colors duration-200 p-2 rounded-full hover:bg-accent-color/20 dark:hover:bg-accent-color/20"
@@ -165,6 +177,15 @@ const Navbar = () => {
                 {item.name}
               </button>
             ))}
+            {process.env.REACT_APP_CV_URL && (
+              <a
+                href={process.env.REACT_APP_CV_URL}
+                download
+                className="block w-full text-left px-3 py-2 text-white bg-gradient-to-r from-cyan-400 to-blue-500 rounded-md font-semibold"
+              >
+                Download CV
+              </a>
+            )}
             <div className="flex items-center space-x-4 px-3 py-2">
               <button
                 onClick={toggleDarkMode}
