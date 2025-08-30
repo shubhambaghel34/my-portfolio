@@ -3,27 +3,6 @@ import { motion } from 'framer-motion';
 import { User, MapPin, Calendar, GraduationCap, Briefcase } from 'lucide-react';
 
 const About = () => {
-  const rawProfileUrl = process.env.REACT_APP_PROFILE_PHOTO_URL || '';
-
-  const deriveProfileImageUrl = (url) => {
-    if (!url) return '';
-    // Handle Google Drive file links: /file/d/FILE_ID
-    const driveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
-    if (driveMatch) {
-      const id = driveMatch[1];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
-    }
-    // Handle Google Drive open?id=FILE_ID
-    const openId = url.match(/[?&]id=([^&]+)/);
-    if (url.includes('drive.google.com') && openId) {
-      const id = openId[1];
-      return `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
-    }
-    // Fallback: assume it's a direct image URL
-    return url;
-  };
-
-  const profileImgSrc = deriveProfileImageUrl(rawProfileUrl);
   const personalInfo = [
     { icon: <MapPin size={20} />, label: 'Location', value: 'Pune, India' },
     { icon: <Calendar size={20} />, label: 'Experience', value: '7+ Years' },
@@ -77,15 +56,8 @@ const About = () => {
             <motion.div variants={itemVariants} className="relative">
               <div className="w-80 h-80 mx-auto relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-color to-accent-color rounded-full opacity-20 blur-xl"></div>
-                <div className="relative w-full h-full bg-gradient-to-br from-yellow-400/30 to-blue-500/30 rounded-full border-2 border-yellow-400/50 shadow-2xl shadow-yellow-400/20 overflow-hidden">
-                  <img
-                    src={profileImgSrc || 'https://via.placeholder.com/320x320.png?text=Profile'}
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/320x320.png?text=Profile'; }}
-                  />
+                <div className="relative w-full h-full bg-gradient-to-br from-yellow-400/30 to-blue-500/30 rounded-full flex items-center justify-center border-2 border-yellow-400/50 shadow-2xl shadow-yellow-400/20">
+                  <User size={120} className="text-yellow-300 drop-shadow-lg" />
                 </div>
               </div>
             </motion.div>
