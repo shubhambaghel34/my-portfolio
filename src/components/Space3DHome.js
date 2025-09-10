@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Home, TreePine, Waves } from 'lucide-react';
+import { Clapperboard, Film, Camera } from 'lucide-react';
 
 const IslandParadiseHome = () => {
   const canvasRef = useRef(null);
@@ -86,6 +86,25 @@ const IslandParadiseHome = () => {
        
                const stars = new THREE.Points(starsGeometry, starsMaterial);
                scene.add(stars);
+
+               // Cinematic: floating dust particles
+               const dustCount = 600;
+               const dustGeometry = new THREE.BufferGeometry();
+               const dustPositions = new Float32Array(dustCount * 3);
+               for (let i = 0; i < dustCount; i++) {
+                 dustPositions[i * 3] = (Math.random() - 0.5) * 30;
+                 dustPositions[i * 3 + 1] = Math.random() * 10;
+                 dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 30;
+               }
+               dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+               const dustMaterial = new THREE.PointsMaterial({
+                 color: 0xffffff,
+                 size: 0.05,
+                 transparent: true,
+                 opacity: 0.6
+               });
+               const dust = new THREE.Points(dustGeometry, dustMaterial);
+               scene.add(dust);
 
                        // Create island base
                const islandGeometry = new THREE.CylinderGeometry(8, 12, 2, 16);
@@ -274,148 +293,157 @@ const IslandParadiseHome = () => {
                    flower.rotation.z = Math.sin(Date.now() * 0.002 + index) * 0.2;
                    flower.position.y = Math.sin(Date.now() * 0.003 + index) * 0.02;
                  });
+
+                 // Cinematic: drift dust slowly upward and wrap
+                 const pos = dust.geometry.attributes.position;
+                 for (let i = 0; i < pos.count; i++) {
+                   let y = pos.getY(i) + 0.003;
+                   if (y > 10) y = 0;
+                   pos.setY(i, y);
+                 }
+                 pos.needsUpdate = true;
+
+                 // Cinematic: slow camera dolly and subtle yaw
+                 const t = Date.now() * 0.0002;
+                 camera.position.z = 14 + Math.sin(t) * 1.2;
+                 camera.position.x = Math.sin(t * 0.7) * 0.6;
+                 camera.lookAt(0, 0.8, 0);
+
+                 // Light sweep
+                 directionalLight.position.x = Math.sin(t * 0.8) * 8;
+                 directionalLight.position.z = Math.cos(t * 0.8) * 8;
        
                  renderer.render(scene, camera);
                };
 
-        animate();
+       animate();
 
-        // Handle window resize
-        const handleResize = () => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        };
+       // Handle window resize
+       const handleResize = () => {
+         camera.aspect = window.innerWidth / window.innerHeight;
+         camera.updateProjectionMatrix();
+         renderer.setSize(window.innerWidth, window.innerHeight);
+       };
 
-        window.addEventListener('resize', handleResize);
+       window.addEventListener('resize', handleResize);
 
-        // Cleanup function
-        return () => {
-          window.removeEventListener('resize', handleResize);
-          if (animationIdRef.current) {
-            cancelAnimationFrame(animationIdRef.current);
-          }
-        };
+       // Cleanup function
+       return () => {
+         window.removeEventListener('resize', handleResize);
+         if (animationIdRef.current) {
+           cancelAnimationFrame(animationIdRef.current);
+         }
+       };
 
-      } catch (error) {
-        console.error('Failed to load Three.js:', error);
-      }
-    };
+     } catch (error) {
+       console.error('Failed to load Three.js:', error);
+     }
+   };
 
-    initThreeJS();
-  }, []);
+   initThreeJS();
+ }, []);
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-    };
-  }, []);
+ // Cleanup on unmount
+ useEffect(() => {
+   return () => {
+     if (animationIdRef.current) {
+       cancelAnimationFrame(animationIdRef.current);
+     }
+   };
+ }, []);
 
-  return (
-    <>
-      {/* 3D Canvas - Fixed Background for entire site */}
-                     <canvas
-                 ref={canvasRef}
-                 className="fixed inset-0 w-full h-full z-0"
-                 style={{ background: 'linear-gradient(135deg, #0B1426 0%, #1E3A8A 50%, #3730A3 100%)' }}
-               />
-      
-      {/* Home Section Content */}
-      <section id="home" className="relative w-full h-screen overflow-hidden z-10">
-      
-      
-      
-      {/* Overlay Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="mb-8"
-        >
-                             <div className="flex items-center justify-center gap-4 mb-4">
-                     <motion.div
-                       animate={{ rotate: 360 }}
-                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                     >
-                       <Home size={60} className="text-amber-600" />
-                     </motion.div>
-                     <motion.div
-                       animate={{ y: [-10, 10, -10] }}
-                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                     >
-                       <TreePine size={80} className="text-green-600" />
-                     </motion.div>
-                     <motion.div
-                       animate={{ rotate: -360 }}
-                       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                     >
-                       <Waves size={60} className="text-blue-500" />
-                     </motion.div>
-                   </div>
-        </motion.div>
+ return (
+   <>
+     {/* 3D Canvas - Fixed Background for entire site */}
+                    <canvas
+                ref={canvasRef}
+                className="fixed inset-0 w-full h-full z-0"
+                style={{ background: 'linear-gradient(135deg, #0A1429 0%, #0E7490 50%, #4C1D95 100%)' }}
+              />
+     
+     {/* Home Section Content */}
+     <section id="home" className="relative w-full h-screen overflow-hidden z-10">
+     
+     
+     
+     {/* Overlay Content */}
+     <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+       <motion.div
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{ opacity: 1, scale: 1 }}
+         transition={{ duration: 1, delay: 0.2 }}
+         className="mb-8"
+       >
+                            <div className="flex items-center justify-center gap-4 mb-4">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Clapperboard size={60} className="text-yellow-400" />
+                    </motion.div>
+                    <motion.div
+                      animate={{ y: [-10, 10, -10] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <Camera size={80} className="text-blue-300" />
+                    </motion.div>
+                    <motion.div
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Film size={60} className="text-purple-300" />
+                    </motion.div>
+                  </div>
+       </motion.div>
 
-                         <motion.h1
-                   initial={{ opacity: 0, y: -50 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ duration: 1, delay: 0.4 }}
-                   className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-blue-400 to-purple-400 bg-clip-text text-transparent"
-                 >
-                   Shubham Baghel
-                 </motion.h1>
-        
-                         <motion.p
-                   initial={{ opacity: 0, y: 50 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ duration: 1, delay: 0.6 }}
-                   className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl font-semibold"
-                 >
-                   Full Stack Developer & Software Engineer
-                 </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-wrap gap-4 justify-center mb-8"
-        >
-                             <div className="bg-yellow-400/20 backdrop-blur-md rounded-lg p-4 border-2 border-yellow-400/40 shadow-lg shadow-yellow-400/20">
-                     <h3 className="text-lg font-semibold mb-2 text-yellow-200">Full Stack</h3>
-                     <p className="text-sm text-yellow-100">Node.js, React, TypeScript</p>
-                   </div>
-                   
-                   <div className="bg-blue-400/20 backdrop-blur-md rounded-lg p-4 border-2 border-blue-400/40 shadow-lg shadow-blue-400/20">
-                     <h3 className="text-lg font-semibold mb-2 text-blue-200">Microservices</h3>
-                     <p className="text-sm text-blue-100">Event-driven architecture</p>
-                   </div>
-                   
-                   <div className="bg-purple-400/20 backdrop-blur-md rounded-lg p-4 border border-purple-400/40 shadow-lg shadow-purple-400/20">
-                     <h3 className="text-lg font-semibold mb-2 text-purple-200">Cloud & DevOps</h3>
-                     <p className="text-sm text-purple-100">AWS, Docker, Kubernetes</p>
-                   </div>
-        </motion.div>
-        
-        
-        
-                 <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ duration: 1, delay: 1.2 }}
-           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center"
-         >
-           <div className="animate-bounce mb-2">
-             <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-               <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
-             </div>
-           </div>
-        </motion.div>
-      </div>
-    </section>
-    </>
-  );
+                        <motion.h1
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-blue-400 to-purple-400 bg-clip-text text-transparent"
+                >
+                  Shubham Baghel
+                </motion.h1>
+       
+                        <motion.p
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                  className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl font-semibold"
+                >
+                  Full Stack Developer & Software Engineer
+                </motion.p>
+       
+       <motion.div
+         initial={{ opacity: 0, scale: 0.5 }}
+         animate={{ opacity: 1, scale: 1 }}
+         transition={{ duration: 1, delay: 0.8 }}
+         className="flex flex-wrap gap-4 justify-center mb-8"
+       >
+                           <div className="bg-yellow-400/20 backdrop-blur-md rounded-lg p-4 border-2 border-yellow-400/40 shadow-lg shadow-yellow-400/20">
+                   <h3 className="text-lg font-semibold mb-2 text-yellow-200">Full Stack</h3>
+                   <p className="text-sm text-yellow-100">Node.js, React, TypeScript</p>
+                 </div>
+                 
+                 <div className="bg-blue-400/20 backdrop-blur-md rounded-lg p-4 border-2 border-blue-400/40 shadow-lg shadow-blue-400/20">
+                   <h3 className="text-lg font-semibold mb-2 text-blue-200">Microservices</h3>
+                   <p className="text-sm text-blue-100">Event-driven architecture</p>
+                 </div>
+                 
+                 <div className="bg-purple-400/20 backdrop-blur-md rounded-lg p-4 border border-purple-400/40 shadow-lg shadow-purple-400/20">
+                   <h3 className="text-lg font-semibold mb-2 text-purple-200">Cloud & DevOps</h3>
+                   <p className="text-sm text-purple-100">AWS, Docker, Kubernetes</p>
+                 </div>
+       </motion.div>
+
+       {/* Cinematic letterbox bars */}
+       {/* <div className="select-none absolute top-0 left-0 w-full h-10 sm:h-14 bg-black/40" />
+       <div className="select-none absolute bottom-0 left-0 w-full h-10 sm:h-14 bg-black/40" /> */}
+       
+     </div>
+   </section>
+   </>
+ );
 };
 
 export default IslandParadiseHome;

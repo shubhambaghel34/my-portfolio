@@ -114,15 +114,6 @@ const Navbar = () => {
                 Download CV
               </motion.a>
             )}
-            <motion.button
-              onClick={toggleDarkMode}
-              className="text-text-secondary hover:text-primary-color transition-colors duration-200 p-2 rounded-full hover:bg-accent-color/20 dark:hover:bg-accent-color/20"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
             <motion.a
               href="https://github.com/shubhambaghel34"
               target="_blank"
@@ -152,9 +143,10 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <motion.button
-            className="md:hidden"
+            className="md:hidden text-white hover:text-cyan-300 transition-colors duration-200"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.95 }}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -167,42 +159,26 @@ const Navbar = () => {
           animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 bg-background-primary/95 backdrop-blur-md rounded-lg mt-2 shadow-lg dark:bg-background-secondary/95">
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 backdrop-blur-md rounded-lg mt-2 shadow-xl border-2 border-cyan-400/30 shadow-cyan-400/20">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-3 py-2 text-text-primary hover:text-primary-color hover:bg-accent-color/20 rounded-md transition-colors duration-200"
+                className="block w-full text-left px-3 py-2 text-cyan-200 hover:text-cyan-300 hover:bg-cyan-400/10 rounded-md transition-colors duration-200 font-medium"
               >
                 {item.name}
               </button>
             ))}
-            {process.env.REACT_APP_CV_URL && (
-              <a
-                href={process.env.REACT_APP_CV_URL}
-                download
-                className="block w-full text-left px-3 py-2 text-white bg-gradient-to-r from-cyan-400 to-blue-500 rounded-md font-semibold"
-              >
-                Download CV
-              </a>
-            )}
             <div className="flex items-center space-x-4 px-3 py-2">
-              <button
-                onClick={toggleDarkMode}
-                className="text-text-secondary hover:text-primary-color p-2 rounded-full hover:bg-accent-color/20 dark:hover:bg-accent-color/20"
-                title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-                          <a href="https://github.com/shubhambaghel34" className="text-text-secondary hover:text-primary-color">
-              <Github size={20} />
-            </a>
-                          <a href="https://linkedin.com/in/shubhamsinhabaghel" className="text-text-secondary hover:text-primary-color">
-              <Linkedin size={20} />
-            </a>
-            <a href="mailto:shubhamsinha.baghel@gmail.com" className="text-text-secondary hover:text-primary-color">
-              <Mail size={20} />
-            </a>
+              <a href="https://github.com/shubhambaghel34" className="text-cyan-200 hover:text-cyan-300">
+                <Github size={20} />
+              </a>
+              <a href="https://linkedin.com/in/shubhamsinhabaghel" className="text-cyan-200 hover:text-cyan-300">
+                <Linkedin size={20} />
+              </a>
+              <a href="mailto:shubhamsinha.baghel@gmail.com" className="text-cyan-200 hover:text-cyan-300">
+                <Mail size={20} />
+              </a>
             </div>
           </div>
         </motion.div>
