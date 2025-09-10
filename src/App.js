@@ -8,20 +8,31 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import IslandParadiseHome from './components/Space3DHome';
 import CV from './components/CV';
+import ErrorBoundary from './components/ErrorBoundary';
+import UnderConstruction from './components/UnderConstruction';
 
 function App() {
+  const isUnderConstruction = process.env.REACT_APP_UNDER_CONSTRUCTION === 'true';
   return (
     <div className="App">
       <Navbar />
-      <main>
-        <IslandParadiseHome />
-        <About />
-        <Experience />
-        <Skills />
-        <Projects />
-        <CV />
-        <Contact />
-      </main>
+      <ErrorBoundary>
+        <main>
+          {isUnderConstruction ? (
+            <UnderConstruction />
+          ) : (
+            <>
+              <IslandParadiseHome />
+              <About />
+              <Experience />
+              <Skills />
+              <Projects />
+              <CV />
+              <Contact />
+            </>
+          )}
+        </main>
+      </ErrorBoundary>
       <Footer />
     </div>
   );
