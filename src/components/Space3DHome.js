@@ -9,6 +9,7 @@ const IslandParadiseHome = () => {
   const animationIdRef = useRef(null);
 
   useEffect(() => {
+
     // Only run on client side
     if (typeof window === 'undefined') return;
 
