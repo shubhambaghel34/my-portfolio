@@ -7,75 +7,15 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'News App',
-      description: 'A modern news application built with React and JavaScript. Features include news categorization, search functionality, and responsive design for all devices.',
-      image: 'https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=News+App',
+      title: 'MyntraXpress',
+      description: 'A responsive, mobile-first shopping experience built with Tailwind CSS, featuring MEN, WOMEN, KIDS, HOME, BEAUTY, and GENZ navigation; category and subcategory browsing; product listings; cart quantity controls; wishlist; login and registration; search and filters; and an auto-rotating hero slider.',
+      image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
-      technologies: ['React', 'JavaScript', 'HTML/CSS', 'News API'],
-      liveUrl: 'https://github.com/shubhambaghel34/Newsapp',
-      githubUrl: 'https://github.com/shubhambaghel34/Newsapp',
-      features: ['News Categories', 'Search Functionality', 'Responsive Design', 'Real-time Updates'],
-      status: 'Completed'
-    },
-    {
-      id: 2,
-      title: 'Counter App',
-      description: 'A simple yet elegant counter application built with JavaScript. Features include increment, decrement, and reset functionality with smooth animations.',
-      image: 'https://via.placeholder.com/400x250/10B981/FFFFFF?text=Counter+App',
-      category: 'frontend',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'CodeSandbox'],
-      liveUrl: 'https://github.com/shubhambaghel34/Counter_App',
-      githubUrl: 'https://github.com/shubhambaghel34/Counter_App',
-      features: ['Counter Functionality', 'Smooth Animations', 'Responsive Design', 'Simple UI'],
-      status: 'Completed'
-    },
-    {
-      id: 3,
-      title: 'Trade App',
-      description: 'A comprehensive trading application built with TypeScript. Features include real-time data, trading charts, and portfolio management.',
-      image: 'https://via.placeholder.com/400x250/8B5CF6/FFFFFF?text=Trade+App',
-      category: 'frontend',
-      technologies: ['TypeScript', 'React', 'Trading APIs', 'Chart.js'],
-      liveUrl: 'https://github.com/shubhambaghel34/Tradeapp',
-      githubUrl: 'https://github.com/shubhambaghel34/Tradeapp',
-      features: ['Real-time Trading Data', 'Interactive Charts', 'Portfolio Management', 'TypeScript'],
-      status: 'Completed'
-    },
-    {
-      id: 4,
-      title: 'Event-Driven Microservices',
-      description: 'Scalable microservices architecture built with NestJS, Redis, and WebSocket.IO. Implements Circuit Breaker pattern and handles 500+ concurrent uploads.',
-      image: 'https://via.placeholder.com/400x250/EF4444/FFFFFF?text=Microservices',
-      category: 'backend',
-      technologies: ['NestJS', 'TypeScript', 'Redis', 'WebSocket.IO', 'AWS Lambda', 'S3'],
-      liveUrl: '#',
+      technologies: [],
+      liveUrl: 'https://myntraxpressappweb-dev.vercel.app/',
       githubUrl: 'https://github.com/shubhambaghel34',
-      features: ['Event-Driven Architecture', 'Circuit Breaker Pattern', 'Real-time Communication', 'AWS Integration'],
-      status: 'Completed'
-    },
-    {
-      id: 5,
-      title: 'API Gateway & Authentication',
-      description: 'Enterprise-grade API gateway with JWT authentication, rate limiting, and monitoring. Built for microservices architecture.',
-      image: 'https://via.placeholder.com/400x250/F59E0B/FFFFFF?text=API+Gateway',
-      category: 'backend',
-      technologies: ['Node.js', 'Express', 'JWT', 'Redis', 'Docker', 'Kubernetes'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/shubhambaghel34',
-      features: ['JWT Authentication', 'Rate Limiting', 'Request Routing', 'Monitoring', 'Load Balancing'],
-      status: 'Completed'
-    },
-    {
-      id: 6,
-      title: 'CI/CD Pipeline Automation',
-      description: 'Automated CI/CD workflows using GitHub Actions, Docker, and Kubernetes. Implements blue-green deployment and automated testing.',
-      image: 'https://via.placeholder.com/400x250/06B6D4/FFFFFF?text=CI+CD',
-      category: 'backend',
-      technologies: ['GitHub Actions', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/shubhambaghel34',
-      features: ['Automated Testing', 'Blue-Green Deployment', 'Infrastructure as Code', 'Monitoring'],
-      status: 'Completed'
+      features: [],
+      status: 'Live'
     }
   ];
 
@@ -114,8 +54,7 @@ const Projects = () => {
           <h2 className="text-4xl font-bold text-white mb-4">Projects</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto"></div>
           <p className="text-xl text-gray-300 mt-6 max-w-3xl mx-auto">
-            A collection of projects that showcase my skills in full-stack development, 
-            problem-solving, and creating user-centric applications.
+            A live project showcasing my work in creating user-centric web applications.
           </p>
         </motion.div>
 
@@ -133,7 +72,7 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="bg-gradient-to-br from-cyan-400/20 to-blue-500/20 backdrop-blur-md border-2 border-cyan-400/40 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 shadow-cyan-400/10 hover:shadow-cyan-400/20"
+              className="bg-transparent border border-cyan-400/40 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-300/70"
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
@@ -144,7 +83,7 @@ const Projects = () => {
                 />
                 <div className="absolute top-4 right-4">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
-                    project.status === 'Completed' 
+                    project.status === 'Live' 
                       ? 'bg-green-400/30 text-green-100 border border-green-400/50 shadow-lg shadow-green-400/20' 
                       : 'bg-yellow-400/30 text-yellow-100 border border-yellow-400/50 shadow-lg shadow-yellow-400/20'
                   }`}>
@@ -156,10 +95,10 @@ const Projects = () => {
               {/* Project Content */}
               <div className="p-6">
                                                 <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-                  <p className="text-gray-300 mb-4 line-clamp-3">{project.description}</p>
+                  <p className="text-sm leading-relaxed text-gray-300 mb-4">{project.description}</p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                {project.technologies.length > 0 && <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, index) => (
                                       <span
                     key={index}
@@ -168,10 +107,10 @@ const Projects = () => {
                     {tech}
                   </span>
                   ))}
-                </div>
+                </div>}
 
                 {/* Features */}
-                <div className="mb-6">
+                {project.features.length > 0 && <div className="mb-6">
                                   <h4 className="font-semibold text-white mb-2">Key Features:</h4>
                 <ul className="space-y-1">
                   {project.features.slice(0, 3).map((feature, index) => (
@@ -181,7 +120,7 @@ const Projects = () => {
                     </li>
                   ))}
                 </ul>
-                </div>
+                </div>}
 
                 {/* Action Buttons */}
                 <div className="flex gap-3">
