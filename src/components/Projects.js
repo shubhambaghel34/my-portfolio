@@ -37,6 +37,15 @@ const Projects = () => {
       category: 'frontend',
       technologies: [],
       liveUrl: 'https://json-formatter-eosin.vercel.app/',
+    },
+    {
+      id:4,
+      title: 'Currency Exchange App',
+      description: 'Convert currencies and follow exchange rates through a clear, easy-to-use interface.',
+      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=85',
+      category: 'frontend',
+      technologies: [],
+      liveUrl: 'https://currency-exchange-app-puce.vercel.app/',
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'

@@ -5,16 +5,14 @@ const CV = () => {
   const rawUrl = process.env.REACT_APP_CV_URL || 'https://drive.google.com/file/d/1CfBzbk1ZjHiIOscyGjF4jA-uR06KSf3Y/view?usp=sharing';
 
   const buildCvLinks = (url) => {
-    if (!url) return { embedSrc: '', downloadHref: '', openHref: '' };
+    if (!url) return { downloadHref: '' };
 
     // Google Drive: /file/d/FILE_ID
     const driveMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
     if (driveMatch) {
       const id = driveMatch[1];
       return {
-        embedSrc: `https://drive.google.com/file/d/${id}/preview`,
         downloadHref: `https://drive.google.com/uc?export=download&id=${id}`,
-        openHref: `https://drive.google.com/file/d/${id}/view`,
       };
     }
 
@@ -23,9 +21,7 @@ const CV = () => {
     if (url.includes('drive.google.com') && openId) {
       const id = openId[1];
       return {
-        embedSrc: `https://drive.google.com/file/d/${id}/preview`,
         downloadHref: `https://drive.google.com/uc?export=download&id=${id}`,
-        openHref: `https://drive.google.com/file/d/${id}/view`,
       };
     }
 
@@ -34,22 +30,17 @@ const CV = () => {
     if (docsMatch) {
       const id = docsMatch[1];
       return {
-        embedSrc: `https://docs.google.com/document/d/${id}/preview`,
         downloadHref: `https://docs.google.com/document/d/${id}/export?format=pdf`,
-        openHref: `https://docs.google.com/document/d/${id}/view`,
       };
     }
 
     // Fallback: assume direct PDF or generic URL
     return {
-      embedSrc: url,
       downloadHref: url,
-      openHref: url,
     };
   };
 
-  const { embedSrc, downloadHref, openHref } = buildCvLinks(rawUrl);
-  const hasUrl = Boolean(rawUrl);
+  const { downloadHref } = buildCvLinks(rawUrl);
   return (
     <section id="cv" className="py-20 relative z-10">
       <div className="container mx-auto px-4 relative z-10">
@@ -67,7 +58,7 @@ const CV = () => {
           </p>
           <div className="flex justify-center mt-6">
             <motion.a
-              href={openHref}
+              href={downloadHref}
               target="_blank"
               rel="noopener noreferrer"
               className={`px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-xl shadow-cyan-400/30`}
