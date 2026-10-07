@@ -28,6 +28,18 @@ const Projects = () => {
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'
+    },
+    {
+      id: 3,
+      title: 'JSON Formatter App',
+      description: 'Format and organize JSON data in a clear interface for easier reading and inspection.',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85',
+      category: 'frontend',
+      technologies: [],
+      liveUrl: 'https://json-formatter-eosin.vercel.app/',
+      githubUrl: 'https://github.com/shubhambaghel34',
+      features: [],
+      status: 'Live'
     }
   ];
 
