@@ -8,11 +8,23 @@ const Projects = () => {
     {
       id: 1,
       title: 'MyntraXpress',
-      description: 'A responsive, mobile-first shopping experience built with Tailwind CSS, featuring MEN, WOMEN, KIDS, HOME, BEAUTY, and GENZ navigation; category and subcategory browsing; product listings; cart quantity controls; wishlist; login and registration; search and filters; and an auto-rotating hero slider.',
+      description: 'Shop fashion, beauty, and home products with category browsing, product search, filters, wishlists, and cart controls.',
       image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
       technologies: [],
       liveUrl: 'https://myntraxpressappweb-dev.vercel.app/',
+      githubUrl: 'https://github.com/shubhambaghel34',
+      features: [],
+      status: 'Live'
+    },
+    {
+      id: 2,
+      title: 'Observability Dashboard',
+      description: 'Monitor application health and service performance through a clear view of key operational metrics.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85',
+      category: 'frontend',
+      technologies: [],
+      liveUrl: 'https://observibility-dashboard-app.vercel.app/',
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'
@@ -72,7 +84,7 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="bg-transparent border border-cyan-400/40 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-300/70"
+              className="h-full flex flex-col bg-transparent border border-cyan-400/40 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-300/70"
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
@@ -93,9 +105,9 @@ const Projects = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
-                                                <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-                  <p className="text-sm leading-relaxed text-gray-300 mb-4">{project.description}</p>
+              <div className="p-6 flex flex-1 flex-col">
+                <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
+                <p className="min-h-[5rem] text-sm leading-relaxed text-gray-300 mb-4">{project.description}</p>
 
                 {/* Technologies */}
                 {project.technologies.length > 0 && <div className="flex flex-wrap gap-2 mb-4">
@@ -123,7 +135,7 @@ const Projects = () => {
                 </div>}
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="mt-auto flex gap-3">
                   <motion.a
                     href={project.liveUrl}
                     target="_blank"
