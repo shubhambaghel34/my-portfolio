@@ -37,6 +37,8 @@ const Projects = () => {
       category: 'frontend',
       technologies: [],
       liveUrl: 'https://json-formatter-eosin.vercel.app/',
+      features: [],
+      status: 'Live'
     },
     {
       id:4,
