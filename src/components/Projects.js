@@ -12,7 +12,7 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
       technologies: [],
-      liveUrl: 'https://myntraxpressappweb-dev.vercel.app/',
+      liveUrl: process.env.REACT_APP_MYNTRAXPRESS_URL,
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'
@@ -24,7 +24,7 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
       technologies: [],
-      liveUrl: 'https://observibility-dashboard-app.vercel.app/',
+      liveUrl: process.env.REACT_APP_OBSERVABILITY_DASHBOARD_URL,
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'
@@ -36,7 +36,7 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
       technologies: [],
-      liveUrl: 'https://json-formatter-eosin.vercel.app/',
+      liveUrl: process.env.REACT_APP_JSON_FORMATTER_URL,
       features: [],
       status: 'Live'
     },
@@ -47,7 +47,7 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=85',
       category: 'frontend',
       technologies: [],
-      liveUrl: 'https://currency-exchange-app-puce.vercel.app/',
+      liveUrl: process.env.REACT_APP_CURRENCY_EXCHANGE_URL,
       githubUrl: 'https://github.com/shubhambaghel34',
       features: [],
       status: 'Live'
@@ -159,17 +159,19 @@ const Projects = () => {
 
                 {/* Action Buttons */}
                 <div className="mt-auto flex gap-3">
-                  <motion.a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-secondary-color transition-colors duration-200"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Eye size={16} />
-                    Live Demo
-                  </motion.a>
+                  {project.liveUrl && (
+                    <motion.a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-secondary-color transition-colors duration-200"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Eye size={16} />
+                      Live Demo
+                    </motion.a>
+                  )}
                   <motion.a
                     href={project.githubUrl}
                     target="_blank"
