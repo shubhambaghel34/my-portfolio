@@ -189,7 +189,7 @@ const Projects = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-secondary-color transition-colors duration-200"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-white border border-cyan-300/60 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 shadow-[0_0_18px_rgba(34,211,238,0.28)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_22px_rgba(34,211,238,0.5)]"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -201,7 +201,7 @@ const Projects = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-primary-color text-primary-color rounded-lg hover:bg-primary-color hover:text-white transition-colors duration-200"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold border border-cyan-400/50 bg-slate-900/70 text-cyan-100 backdrop-blur-sm transition-all duration-200 hover:border-cyan-200 hover:bg-cyan-500/10 hover:text-white hover:shadow-[0_0_18px_rgba(34,211,238,0.25)]"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
